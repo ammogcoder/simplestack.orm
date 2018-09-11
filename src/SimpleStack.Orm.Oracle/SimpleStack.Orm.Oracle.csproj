@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Oraclle Provider for SimpleStack.Orm</Description>
+    <VersionPrefix>1.0.2</VersionPrefix>
+    <Authors>SimpleStack Team;NServiceKit;ServiceStack</Authors>
+    <TargetFrameworks>netstandard2</TargetFrameworks>
+    <AssemblyName>SimpleStack.Orm.Oracle</AssemblyName>
+    <PackageId>SimpleStack.Orm.Oracle</PackageId>
+    <PackageTags>SimpleStack;Oracle</PackageTags>
+    <PackageLicenseUrl>http://www.opensource.org/licenses/MIT</PackageLicenseUrl>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <Version>1.0.4</Version>
+    <AssemblyVersion>1.0.4.0</AssemblyVersion>
+    <FileVersion>1.0.4.0</FileVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleStack.Orm\SimpleStack.Orm.csproj"/>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.12.0-beta3"/>
+  </ItemGroup>
+</Project>
