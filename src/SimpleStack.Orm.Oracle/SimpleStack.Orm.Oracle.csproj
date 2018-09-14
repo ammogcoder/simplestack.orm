@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>Oraclle Provider for SimpleStack.Orm</Description>
     <VersionPrefix>1.0.2</VersionPrefix>
     <Authors>SimpleStack Team;NServiceKit;ServiceStack</Authors>
-    <TargetFrameworks>netstandard2</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
     <AssemblyName>SimpleStack.Orm.Oracle</AssemblyName>
     <PackageId>SimpleStack.Orm.Oracle</PackageId>
     <PackageTags>SimpleStack;Oracle</PackageTags>

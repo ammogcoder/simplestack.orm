@@ -17,6 +17,8 @@ using SimpleStack.Orm.MySQLConnector;
 using Microsoft.SqlServer.Server;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using Oracle.ManagedDataAccess.Client;
+using SimpleStack.Orm.Oracle;
 
 namespace SimpleStack.Orm.Tests
 {
@@ -238,7 +240,7 @@ namespace SimpleStack.Orm.Tests
 	}
 	public class SQLLiteTests : ExpressionTests
 	{
-		private Microsoft.Data.Sqlite.SqliteConnectionStringBuilder builder;
+		private readonly SqliteConnectionStringBuilder builder;
 		public SQLLiteTests() : base(new SqliteDialectProvider())
 		{
 			builder = new SqliteConnectionStringBuilder();
@@ -258,4 +260,17 @@ namespace SimpleStack.Orm.Tests
 
 		protected override string ConnectionString => builder.ToString();
 	}
+    public class OracleTests : ExpressionTests
+    {
+        private readonly OracleConnectionStringBuilder _oracleConnectionStringBuilder;
+
+        public OracleTests() : base(new OracleDialectProvider(true))
+        {
+            _oracleConnectionStringBuilder= new OracleConnectionStringBuilder("(DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))) (CONNECT_DATA = (SERVICE_NAME = xe)))");
+            _oracleConnectionStringBuilder.UserID = "system";
+            _oracleConnectionStringBuilder.Password = "oracle";
+        }
+
+        protected override string ConnectionString => _oracleConnectionStringBuilder.ToString();
+    }
 }

@@ -11,6 +11,10 @@ namespace SimpleStack.Orm.Oracle
     /// <typeparam name="T">Generic type parameter.</typeparam>
 	public class OracleSqlExpressionVisitor<T>:SqlExpressionVisitor<T>
 	{
+	    public OracleSqlExpressionVisitor(IDialectProvider dialectProvider) : base(dialectProvider)
+	    {
+	    }
+
         /// <summary>Visit column access method.</summary>
         /// <param name="m">The MethodCallExpression to process.</param>
         /// <returns>An object.</returns>
@@ -24,29 +28,19 @@ namespace SimpleStack.Orm.Oracle
                 if (args.Count == 2)
                 {
                     var length = Int32.Parse(args[1].ToString());
-                    return new PartialSqlString(string.Format("subStr({0},{1},{2})",
-                                                              quotedColName,
-                                                              startIndex,
-                                                              length));
+                    return new PartialSqlString($"subStr({quotedColName},{startIndex},{length})");
                 }
 
-                return new PartialSqlString(string.Format("subStr({0},{1})",
-                                                          quotedColName,
-                                                          startIndex));
+                return new PartialSqlString($"subStr({quotedColName},{startIndex})");
             }
             return base.VisitColumnAccessMethod(m);
         }
 
         /// <summary>Gets the limit expression.</summary>
         /// <value>The limit expression.</value>
-		public override string LimitExpression{
-			get
-            {
-                return "";
-			}
-		}
+		public override string LimitExpression => "";
 
-        /// <summary>
+	    /// <summary>
         /// from Simple.Data.Oracle implementation
         /// https://github.com/flq/Simple.Data.Oracle/blob/master/Simple.Data.Oracle/OraclePager.cs.
         /// </summary>
@@ -80,7 +74,8 @@ namespace SimpleStack.Orm.Oracle
                 return sql;
             if (!Skip.HasValue)
             {
-                Skip = 0;
+                Limit(0, Rows.Value);
+//                Skip = 0;
             }
             sql = UpdateWithOrderByIfNecessary(sql);
             var sb = new StringBuilder();
@@ -94,7 +89,6 @@ namespace SimpleStack.Orm.Oracle
             return sb.ToString();
 
         }
-				
 	}
 }
 
